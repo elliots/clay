@@ -5,6 +5,12 @@ import "text/template"
 var regTemplate = template.Must(template.New("svc-reg").Funcs(funcMap).Parse(`
 {{ define "base" }}
 {{ range $svc := .Services }}
+
+type {{ $svc.GetName | goTypeName }} interface {
+	{{ $svc.GetName | goTypeName }}Server
+	GetDescription() {{ pkg "transport" }}ServiceDesc
+}
+
 // {{ $svc.GetName | goTypeName }}Desc is a descriptor/registrator for the {{ $svc.GetName | goTypeName  }}Server.
 type {{ $svc.GetName | goTypeName }}Desc struct {
       svc {{ $svc.GetName | goTypeName }}Server
