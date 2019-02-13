@@ -19,6 +19,10 @@ svc:svc,
 }
 }
 
+func (d *{{ $svc.GetName | goTypeName }}Desc) ServiceName() string {
+    return _{{ $svc.GetName | goTypeName }}_serviceDesc.ServiceName
+}
+
 // RegisterGRPC implements service registrator interface.
 func (d *{{ $svc.GetName | goTypeName }}Desc) RegisterGRPC(s *{{ pkg "grpc" }}Server) {
       Register{{ $svc.GetName | goTypeName }}Server(s,d.svc)

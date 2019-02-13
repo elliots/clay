@@ -19,6 +19,7 @@ type ServiceDesc interface {
 	RegisterGRPC(*grpc.Server)
 	RegisterHTTP(Router)
 	SwaggerDef(options ...swagger.Option) []byte
+	ServiceName() string
 }
 
 // Router routes HTTP requests around.
